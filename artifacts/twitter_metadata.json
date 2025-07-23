@@ -9,6 +9,45 @@
 				"inputs": [
 					{
 						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "Reports",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "date",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "doctername",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "docspecilist",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
 						"name": "name",
 						"type": "string"
 					},
@@ -20,6 +59,21 @@
 					{
 						"internalType": "string",
 						"name": "hospitalname",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "datereportedd",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "doctername",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "docterspecilist",
 						"type": "string"
 					}
 				],
@@ -134,6 +188,47 @@
 						"type": "string"
 					}
 				],
+				"name": "getreports",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "date",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "doctername",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "docspecilist",
+								"type": "string"
+							}
+						],
+						"internalType": "struct twitter.Datereported[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "hospitalname",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
 				"name": "getuser",
 				"outputs": [
 					{
@@ -154,7 +249,7 @@
 						"type": "tuple"
 					}
 				],
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -271,11 +366,11 @@
 	},
 	"sources": {
 		"contracts/1_Storage.sol": {
-			"keccak256": "0xe473c1ad72a29a8a4dcc54868311c3a27c15bb847d26dd4d49f608c7972c4905",
+			"keccak256": "0x80d64f8129965194e5a0719a61e9360e933cc5e9a0f9cb4f42ef1b117616197f",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://4af02df89fda5058570bd1c52c56bb7a05e790553c81508056dbe48bffb5bca4",
-				"dweb:/ipfs/QmeA5M9Qwz8GxSRt8hXg2qHyqGMUiLWzztUiKdGUzFy5Cq"
+				"bzz-raw://4cd5884dbf7069e5da242e9d5ddbb4cd4511eb74ca9e4456390650f03989f722",
+				"dweb:/ipfs/QmdKjyriGiBFXXPTA9J3oYeGjs19V585xpfoN7S3hd2zX8"
 			]
 		}
 	},

@@ -8,19 +8,29 @@ pragma solidity >=0.8.2 <0.9.0;
  * @custom:dev-run-script ./scripts/deploy_with_ethers.ts
  */
 contract twitter {
-    
+  struct  Datereported{
+      string date;
+      string doctername;
+      string docspecilist;
 
+  }  
+  
 struct Host{
   string name;
    uint104 age;
+
+   
+
 }
+mapping(string => mapping(string => Datereported[])) public Reports;
+
 
 struct User {
     string name;
     string email;
     uint168 phnum;
     string hospitalname;
-    // mapping(string => Host[]) patients; // mapping of disease => patient history
+    mapping(string => Host[] ) patients; 
 
 }
 mapping(string => mapping(string => Host)) public patients;
@@ -52,23 +62,43 @@ function getuseremial( string  memory uname)  public  view returns(string memory
 
 
 //hospiyall
-function addpatient( string memory name,uint104 age, string memory hospitalname) public   {
+function addpatient( string memory name,uint104 age, string memory hospitalname,string  memory datereportedd,string memory doctername,string memory docterspecilist) public   {
 
 // host current=host(name,age);
+Datereported memory reported=Datereported(datereportedd,doctername,docterspecilist);
 
 
+// Host storage  patientdetails;
+// patientdetails.name=name;
+// patientdetails.age=age;
 
-Host memory  patientdetails=Host(name,age);
 // patients[hospitalname].push(patientdetails);
-patients[hospitalname][name]=patientdetails;
-allpatientshospital[hospitalname].push(patientdetails);
+
+Host storage patientdetails=patients[hospitalname][name];
+
+patientdetails.name=name;
+patientdetails.age=age;     
+allpatientshospital[hospitalname].push(  patientdetails);
+
+Reports[hospitalname][name].push(reported);
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
 
 
 
-function getuser(string  memory hospitalname, string memory name)  public  view   returns(  Host memory )     {
+function getuser(string  memory hospitalname, string memory name)  public  returns (Host memory)   {
    
     return  patients[hospitalname][name];
 
@@ -82,6 +112,9 @@ function getallpatientsinhospital( string memory hospitalname) public  returns (
     return  allpatientshospital[hospitalname];
 
 
+}
+function getreports(string  memory  hospitalname,string memory name) public  returns(Datereported  [] memory){
+return  Reports[hospitalname][name];
 }
 
 
