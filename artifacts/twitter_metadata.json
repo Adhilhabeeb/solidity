@@ -1,0 +1,153 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint104",
+						"name": "age",
+						"type": "uint104"
+					},
+					{
+						"internalType": "string",
+						"name": "hospitalname",
+						"type": "string"
+					}
+				],
+				"name": "addpatient",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "hospitalname",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "email",
+						"type": "string"
+					},
+					{
+						"internalType": "uint168",
+						"name": "phnum",
+						"type": "uint168"
+					}
+				],
+				"name": "createaccount",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "uname",
+						"type": "string"
+					}
+				],
+				"name": "getuseremial",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "users",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "emial",
+						"type": "string"
+					},
+					{
+						"internalType": "uint168",
+						"name": "phnum",
+						"type": "uint168"
+					},
+					{
+						"internalType": "string",
+						"name": "hospitalname",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"custom:dev-run-script": "./scripts/deploy_with_ethers.ts",
+			"details": "Store & retrieve value in a variable",
+			"kind": "dev",
+			"methods": {},
+			"title": "Storage",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/1_Storage.sol": "twitter"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/1_Storage.sol": {
+			"keccak256": "0xe22c818f575a43ddec2b77debd3ceb7ab76db306b678f7d215cdade80efd49bd",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://bcdbb979628f50439bb3088e774fe92423f61ec2c4100ec28740299475637484",
+				"dweb:/ipfs/QmcnrmNovanZpcSWuigwCcmFLs3pz3AAeXNwcgnq7sFfD2"
+			]
+		}
+	},
+	"version": 1
+}
