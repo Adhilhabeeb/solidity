@@ -49,11 +49,40 @@
 						"internalType": "uint168",
 						"name": "phnum",
 						"type": "uint168"
+					},
+					{
+						"internalType": "uint256",
+						"name": "age",
+						"type": "uint256"
 					}
 				],
 				"name": "createaccount",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "hospitalname",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"name": "getuser",
+				"outputs": [
+					{
+						"internalType": "uint104",
+						"name": "",
+						"type": "uint104"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -81,6 +110,35 @@
 						"internalType": "string",
 						"name": "",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "patients",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint104",
+						"name": "age",
+						"type": "uint104"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
 					}
 				],
 				"name": "users",
@@ -92,7 +150,7 @@
 					},
 					{
 						"internalType": "string",
-						"name": "emial",
+						"name": "email",
 						"type": "string"
 					},
 					{
@@ -141,11 +199,11 @@
 	},
 	"sources": {
 		"contracts/1_Storage.sol": {
-			"keccak256": "0xe22c818f575a43ddec2b77debd3ceb7ab76db306b678f7d215cdade80efd49bd",
+			"keccak256": "0x20820afb69d605c79e4e8e186e32b03d0bf2f7b64d71b0aa882ee429ef886842",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://bcdbb979628f50439bb3088e774fe92423f61ec2c4100ec28740299475637484",
-				"dweb:/ipfs/QmcnrmNovanZpcSWuigwCcmFLs3pz3AAeXNwcgnq7sFfD2"
+				"bzz-raw://a33ce90422b02be33aa63dda390705eee7095c5719f69562d050d86dad09ff9e",
+				"dweb:/ipfs/QmRw6s5gWiD5Rp3aKDaLRRpxmmdZZyBUQB1b3WuSr8Qr86"
 			]
 		}
 	},

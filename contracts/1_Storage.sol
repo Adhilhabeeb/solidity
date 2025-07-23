@@ -15,26 +15,26 @@ struct Host{
    uint104 age;
 }
 
-struct  User {
+struct User {
     string name;
-    string emial;
+    string email;
     uint168 phnum;
-           string hospitalname;
-}
- mapping(string => Host[])  patients ;
+    string hospitalname;
+    // mapping(string => Host[]) patients; // mapping of disease => patient history
 
+}
+mapping(string => mapping(string => Host)) public patients;
     mapping  ( string => User ) public  users;
 
-function createaccount(string  memory name,string memory  hospitalname,string  memory email,uint168 phnum ) public {
+function createaccount(string  memory name,string memory  hospitalname,string  memory email,uint168 phnum,uint age ) public {
 
 
-User memory current;
+User   storage  current =users[name];
 current.name=name;
-current.emial=email;
+current.email=email;
 current.phnum=phnum;
 current.hospitalname=hospitalname;
 
-users[name]=current;
 
 
 
@@ -45,7 +45,7 @@ users[name]=current;
 function getuseremial( string  memory uname)  public  view returns(string memory ){
 
 
- return   users[uname].emial;
+ return   users[uname].email;
 
 
 }
@@ -59,12 +59,21 @@ function addpatient( string memory name,uint104 age, string memory hospitalname)
 
 
 Host memory  patientdetails=Host(name,age);
-patients[hospitalname].push(patientdetails);
+// patients[hospitalname].push(patientdetails);
+patients[hospitalname][name]=patientdetails;
 
 
 
 }
 
+
+
+function getuser(string  memory hospitalname, string memory name)  public  view   returns(uint104)     {
+   
+    return  patients[hospitalname][name].age;
+
+    
+}
 
 
 
