@@ -25,8 +25,8 @@ struct User {
 }
 mapping(string => mapping(string => Host)) public patients;
     mapping  ( string => User ) public  users;
-
-function createaccount(string  memory name,string memory  hospitalname,string  memory email,uint168 phnum,uint age ) public {
+mapping  (string =>Host[]) public  allpatientshospital;
+function createpatientaccount(string  memory name,string memory  hospitalname,string  memory email,uint168 phnum,uint age ) public {
 
 
 User   storage  current =users[name];
@@ -51,7 +51,7 @@ function getuseremial( string  memory uname)  public  view returns(string memory
 }
 
 
-
+//hospiyall
 function addpatient( string memory name,uint104 age, string memory hospitalname) public   {
 
 // host current=host(name,age);
@@ -61,21 +61,28 @@ function addpatient( string memory name,uint104 age, string memory hospitalname)
 Host memory  patientdetails=Host(name,age);
 // patients[hospitalname].push(patientdetails);
 patients[hospitalname][name]=patientdetails;
-
+allpatientshospital[hospitalname].push(patientdetails);
 
 
 }
 
 
 
-function getuser(string  memory hospitalname, string memory name)  public  view   returns(uint104)     {
+function getuser(string  memory hospitalname, string memory name)  public  view   returns(  Host memory )     {
    
-    return  patients[hospitalname][name].age;
+    return  patients[hospitalname][name];
 
     
 }
 
 
+
+function getallpatientsinhospital( string memory hospitalname) public  returns (Host[] memory) {
+
+    return  allpatientshospital[hospitalname];
+
+
+}
 
 
 

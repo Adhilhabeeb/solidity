@@ -32,6 +32,35 @@
 				"inputs": [
 					{
 						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "allpatientshospital",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint104",
+						"name": "age",
+						"type": "uint104"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
 						"name": "name",
 						"type": "string"
 					},
@@ -56,8 +85,39 @@
 						"type": "uint256"
 					}
 				],
-				"name": "createaccount",
+				"name": "createpatientaccount",
 				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "hospitalname",
+						"type": "string"
+					}
+				],
+				"name": "getallpatientsinhospital",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "uint104",
+								"name": "age",
+								"type": "uint104"
+							}
+						],
+						"internalType": "struct twitter.Host[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -77,9 +137,21 @@
 				"name": "getuser",
 				"outputs": [
 					{
-						"internalType": "uint104",
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "uint104",
+								"name": "age",
+								"type": "uint104"
+							}
+						],
+						"internalType": "struct twitter.Host",
 						"name": "",
-						"type": "uint104"
+						"type": "tuple"
 					}
 				],
 				"stateMutability": "view",
@@ -199,11 +271,11 @@
 	},
 	"sources": {
 		"contracts/1_Storage.sol": {
-			"keccak256": "0x20820afb69d605c79e4e8e186e32b03d0bf2f7b64d71b0aa882ee429ef886842",
+			"keccak256": "0xe473c1ad72a29a8a4dcc54868311c3a27c15bb847d26dd4d49f608c7972c4905",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://a33ce90422b02be33aa63dda390705eee7095c5719f69562d050d86dad09ff9e",
-				"dweb:/ipfs/QmRw6s5gWiD5Rp3aKDaLRRpxmmdZZyBUQB1b3WuSr8Qr86"
+				"bzz-raw://4af02df89fda5058570bd1c52c56bb7a05e790553c81508056dbe48bffb5bca4",
+				"dweb:/ipfs/QmeA5M9Qwz8GxSRt8hXg2qHyqGMUiLWzztUiKdGUzFy5Cq"
 			]
 		}
 	},
