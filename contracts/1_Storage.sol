@@ -35,7 +35,7 @@ struct User {
     string email;
     uint168 phnum;
     string hospitalname;
-    mapping(string => Host[] ) reportsar; 
+    mapping(string => Datereported[] ) reportsar; 
 
 }
 mapping(string => mapping(string => Host)) public patients;
@@ -44,18 +44,19 @@ mapping  (string =>Host[]) public  allpatientshospital;
 
 
 
-//checking crtainguserofhostital
+//checking crtainguserofhostital  patent hospitelil indo
 modifier   checkpatientonhosputl (string memory hospitanname,string memory patietname) {
-require(  bytes(patients[hospitanname][patietname].name ).length>1 , "sorry noyt foihdd");
+require(  bytes(patients[hospitanname][patietname].name ).length>1 , "sorry noyt foihdd plzz contact hospital authories");
 _;
 }
-function createpatientaccount(string  memory name,string memory  hospitalname,string  memory email,uint168 phnum,uint age ) public checkpatientonhosputl(hospitalname,name) {
+function createpatientaccount(string  memory name,string memory  hospitalname,string  memory email,uint168 phnum ) public checkpatientonhosputl(hospitalname,name) {
 
 
 User   storage  current =users[name];
 current.name=name;
 current.email=email;
 current.phnum=phnum;
+
 current.hospitalname=hospitalname;
 
 
@@ -64,19 +65,31 @@ current.hospitalname=hospitalname;
 
 }
 
+//checking crtainguserofhostital  patent hospitelil indo
 
 
-function getuseremial( string  memory uname)  public  view returns(string memory ){
+//useremialexiix
+modifier  checkuseremailexist(string memory name) {
+
+require(bytes(users[name].name).length>=1,"no user found using the given name ");
+
+    _;
+}
+
+
+function getuseremial( string  memory uname)  public  checkuseremailexist(uname) view returns(string memory ){
+
 
 
  return   users[uname].email;
 
 
 }
+//useremialexiix
 
 
 //hospiyall
-function addpatient( string memory name,string  memory blood,uint104 age, string memory hospitalname,string  memory datereportedd,string memory doctername,string memory docterspecilist) public   {
+function addpatient( string memory name,string  memory blood,uint104 age, string memory hospitalname,string memory doctername,string memory docterspecilist) public   {
 
 // host current=host(name,age);
 Datereported memory reported=Datereported(getDate(),doctername,docterspecilist);
@@ -99,6 +112,7 @@ allpatientshospital[hospitalname].push(  patientdetails);
 Reports[hospitalname][name].push(reported);
 
 
+users[name].reportsar[hospitalname].push(reported);
 
 
 
@@ -124,13 +138,15 @@ return datestr;
         
     }
 
-function addreports(string memory  hospitalname,string memory name,string  memory datereportedd,string memory doctername,string memory docterspecilist)  public   {
+function addreports(string memory  hospitalname,string memory name,string memory doctername,string memory docterspecilist)  public   {
 Datereported memory reported=Datereported(getDate(),doctername,docterspecilist);
 Reports[hospitalname][name].push(reported);
+//  addto users
+users[name].reportsar[hospitalname].push(reported);
 
 }
 
-function getuser(string  memory hospitalname, string memory name)  public  returns (Host memory)   {
+function getuser(string  memory hospitalname, string memory name)  public view   returns (Host memory)   {
    
     return  patients[hospitalname][name];
 
@@ -148,7 +164,7 @@ _;
 
 
 
-function getallpatientsinhospital( string memory hospitalname) public checkallpattientarrlength(hospitalname)  returns (Host[] memory) {
+function getallpatientsinhospital( string memory hospitalname) public checkallpattientarrlength(hospitalname) view   returns (Host[] memory) {
 
     return  allpatientshospital[hospitalname];
 
@@ -156,7 +172,7 @@ function getallpatientsinhospital( string memory hospitalname) public checkallpa
 }
 
 
-function getreports(string  memory  hospitalname,string memory name) public  returns(Datereported  [] memory){
+function getreports(string  memory  hospitalname,string memory name) public view   returns(Datereported  [] memory){
 return  Reports[hospitalname][name];
 }
 

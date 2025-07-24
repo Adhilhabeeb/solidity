@@ -68,11 +68,6 @@
 					},
 					{
 						"internalType": "string",
-						"name": "datereportedd",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
 						"name": "doctername",
 						"type": "string"
 					},
@@ -97,11 +92,6 @@
 					{
 						"internalType": "string",
 						"name": "name",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "datereportedd",
 						"type": "string"
 					},
 					{
@@ -175,11 +165,6 @@
 						"internalType": "uint168",
 						"name": "phnum",
 						"type": "uint168"
-					},
-					{
-						"internalType": "uint256",
-						"name": "age",
-						"type": "uint256"
 					}
 				],
 				"name": "createpatientaccount",
@@ -233,7 +218,7 @@
 						"type": "tuple[]"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -274,7 +259,7 @@
 						"type": "tuple[]"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -315,7 +300,7 @@
 						"type": "tuple"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -474,11 +459,11 @@
 			]
 		},
 		"contracts/1_Storage.sol": {
-			"keccak256": "0xfab352a481d4451f99e5f04cff078fe959df999308ea91e91b4d5382161eebe7",
+			"keccak256": "0x70e15e8b5435357713ea957e57cfd024168a796210cf761aef1372a648b9e918",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://84ec8694b38cf793f93ff16f01dac29c98cfa05108e2f9bc3d34b8570638b942",
-				"dweb:/ipfs/QmZrfmJjbcUJpcJ24ytozNP3MuJ5gTdhSMSDoxhLLj12Ja"
+				"bzz-raw://542889e59c1653a1eb298703a080bc5807a92717fcea91a8b09d56d0f53931fd",
+				"dweb:/ipfs/QmY2GwW3nvs1dvi7922gsyq584kSQ38hDT9ogEYBZN2LCq"
 			]
 		},
 		"github/RollaProject/solidity-datetime/contracts/DateTime.sol": {
