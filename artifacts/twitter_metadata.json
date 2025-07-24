@@ -52,6 +52,11 @@
 						"type": "string"
 					},
 					{
+						"internalType": "string",
+						"name": "blood",
+						"type": "string"
+					},
+					{
 						"internalType": "uint104",
 						"name": "age",
 						"type": "uint104"
@@ -86,6 +91,39 @@
 				"inputs": [
 					{
 						"internalType": "string",
+						"name": "hospitalname",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "datereportedd",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "doctername",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "docterspecilist",
+						"type": "string"
+					}
+				],
+				"name": "addreports",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
 						"name": "",
 						"type": "string"
 					},
@@ -106,6 +144,11 @@
 						"internalType": "uint104",
 						"name": "age",
 						"type": "uint104"
+					},
+					{
+						"internalType": "string",
+						"name": "bloodgroup",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -165,6 +208,11 @@
 								"internalType": "uint104",
 								"name": "age",
 								"type": "uint104"
+							},
+							{
+								"internalType": "string",
+								"name": "bloodgroup",
+								"type": "string"
 							}
 						],
 						"internalType": "struct twitter.Host[]",
@@ -242,6 +290,11 @@
 								"internalType": "uint104",
 								"name": "age",
 								"type": "uint104"
+							},
+							{
+								"internalType": "string",
+								"name": "bloodgroup",
+								"type": "string"
 							}
 						],
 						"internalType": "struct twitter.Host",
@@ -295,6 +348,11 @@
 						"internalType": "uint104",
 						"name": "age",
 						"type": "uint104"
+					},
+					{
+						"internalType": "string",
+						"name": "bloodgroup",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -366,11 +424,11 @@
 	},
 	"sources": {
 		"contracts/1_Storage.sol": {
-			"keccak256": "0x80d64f8129965194e5a0719a61e9360e933cc5e9a0f9cb4f42ef1b117616197f",
+			"keccak256": "0xe38bfd5af758e6236592742438d4b5c1fe87a38bfcd1c82af0b44dda0ff99058",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://4cd5884dbf7069e5da242e9d5ddbb4cd4511eb74ca9e4456390650f03989f722",
-				"dweb:/ipfs/QmdKjyriGiBFXXPTA9J3oYeGjs19V585xpfoN7S3hd2zX8"
+				"bzz-raw://ccba3ab173dd6e6fe89224521ba407e754f459c6612496565f70bc78d26e7f04",
+				"dweb:/ipfs/QmTvhdocrETNSczutHSm4hxRLZWPXDFG3pJgT2ynTj4EUg"
 			]
 		}
 	},
