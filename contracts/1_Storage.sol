@@ -10,8 +10,22 @@ pragma solidity >=0.8.2 <0.9.0;
 
 import "github/RollaProject/solidity-datetime/contracts/DateTime.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+  
+interface  iAdmin {
+    // it pole nammakk  vere contracts ine ingne interface use cheth call cheyym 
+     function getadminaddres() external;
+     function changeadmin(address newadinadd) external  ;
+ 
+}
 contract Twitter   {
 
+iAdmin public  Admincontrsct;
+
+constructor (address deployedadmincontctaddress){
+
+Admincontrsct=iAdmin(deployedadmincontctaddress);
+
+}
 
   struct  Datereported{
       string date;
@@ -29,6 +43,11 @@ string bloodgroup;
 }
 mapping(string => mapping(string => Datereported[])) public Reports;
 
+
+function changadmin(address newadminadd) public {
+
+    Admincontrsct.changeadmin(newadminadd);
+}
 
 struct User {
     string name;

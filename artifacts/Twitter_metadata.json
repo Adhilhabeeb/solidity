@@ -8,6 +8,30 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "deployedadmincontctaddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "Admincontrsct",
+				"outputs": [
+					{
+						"internalType": "contract iAdmin",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "string",
 						"name": "",
 						"type": "string"
@@ -142,6 +166,19 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newadminadd",
+						"type": "address"
+					}
+				],
+				"name": "changadmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -459,11 +496,11 @@
 			]
 		},
 		"contracts/1_Storage.sol": {
-			"keccak256": "0x70e15e8b5435357713ea957e57cfd024168a796210cf761aef1372a648b9e918",
+			"keccak256": "0x7b6b2080e200da5ba70dd057704ab52ba614032c89704b4073c93579b72a002c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://542889e59c1653a1eb298703a080bc5807a92717fcea91a8b09d56d0f53931fd",
-				"dweb:/ipfs/QmY2GwW3nvs1dvi7922gsyq584kSQ38hDT9ogEYBZN2LCq"
+				"bzz-raw://dca64feb62876a2dc2b6735f8a2211fce9f4649a2dc32f63c7c1f58d179fdbbe",
+				"dweb:/ipfs/QmZ4JK5JfaywY1V76VpRFCVrDAyFP5qc6YRZM8TPQuLBg2"
 			]
 		},
 		"github/RollaProject/solidity-datetime/contracts/DateTime.sol": {
