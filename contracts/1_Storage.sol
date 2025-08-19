@@ -8,7 +8,7 @@ pragma solidity >=0.8.2 <0.9.0;
  * @custom:dev-run-script ./scripts/deploy_with_ethers.ts
  */
 
-import "github/RollaProject/solidity-datetime/contracts/DateTimeContract.sol";
+import "github/Adhilhabeeb/solidity/contracts/DateTime.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
   
 interface  iAdmin {
@@ -34,6 +34,10 @@ function Addhospital( string memory hospitalname) public  {
     Hospitalscurrentworking[hospitalname]=true;
 }
 
+
+function resumehospital(string memory hospitalname) public  {
+    Hospitalscurrentworking[hospitalname]=true;
+}
 
 function pausehospital(string memory hospitalname)  public {
     Hospitalscurrentworking[hospitalname]=false; 
@@ -90,7 +94,9 @@ struct User {
     mapping(string => Datereported[] ) reportsar; 
 
 }
+
 mapping(string => mapping(string => Host)) public patients;
+
     mapping  ( string => User ) public  users;
 mapping  (string =>Host[]) public  allpatientshospital;
 
