@@ -1,176 +1,237 @@
-// SPDX-License-Identifier: GPL-3.0
+// SPDX-License-Identifier: MIT
 
-pragma solidity >=0.7.0 <0.9.0;
+pragma solidity >=0.8.2 <0.9.0;
 
-/** 
- * @title Ballot
- * @dev Implements voting process along with vote delegation
+/**
+ * @title Storage
+ * @dev Store & retrieve value in a variable
+ * @custom:dev-run-script ./scripts/deploy_with_ethers.ts
  */
-contract Ballot {
-    // This declares a new complex type which will
-    // be used for variables later.
-    // It will represent a single voter.
-    struct Voter {
-        uint weight; // weight is accumulated by delegation
-        bool voted;  // if true, that person already voted
-        address delegate; // person delegated to
-        uint vote;   // index of the voted proposal
+
+import "github/RollaProject/solidity-datetime/contracts/DateTimeContract.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+  
+interface  iAdmin {
+    // it pole nammakk  vere contracts ine ingne interface use cheth call cheyym 
+     function getadminaddres() external view  returns (address);
+     function changeadmin(address newadinadd) external  ;
+ 
+}
+contract Twitter   {
+
+iAdmin public  Admincontrsct;
+constructor (address deployedadmincontctaddress){
+
+Admincontrsct=iAdmin(deployedadmincontctaddress);
+
+}
+// hospitals adding deletig and pausing workinfg
+mapping (string=> bool) public Hospitalscurrentworking;
+
+
+function Addhospital( string memory hospitalname) public  {
+
+    Hospitalscurrentworking[hospitalname]=true;
+}
+
+
+function pausehospital(string memory hospitalname)  public {
+    Hospitalscurrentworking[hospitalname]=false; 
+}
+
+
+modifier  checkhospitalcurrentlyworking (string memory hospitalname){
+require(bytes(hospitalname).length>1,"plz.  enter. aa valid hospitalname");
+require( Hospitalscurrentworking[hospitalname],"sorryyourhospitalis not working ");
+
+_;
+}
+
+
+
+//
+function getadminofcontract() public  view  returns (address){
+ return    Admincontrsct.getadminaddres();
+
+}
+//
+
+
+
+
+
+
+  struct  Datereported{
+      string date;
+      string doctername;
+      string docspecilist;
+      string imagedata;
+      string medicine;
+
+  }  
+  
+struct Host{
+  string name;
+   uint104 age;
+string bloodgroup;
+   
+
+}
+mapping(string => mapping(string => Datereported[])) public Reports;
+
+
+function changadmin(address newadminadd) public {
+
+    Admincontrsct.changeadmin(newadminadd);
+}
+
+struct User {
+    string name;
+    string email;
+    uint168 phnum;
+    string hospitalname;
+    mapping(string => Datereported[] ) reportsar; 
+
+}
+mapping(string => mapping(string => Host)) public patients;
+    mapping  ( string => User ) public  users;
+mapping  (string =>Host[]) public  allpatientshospital;
+
+
+
+//checking crtainguserofhostital  patent hospitelil indo
+modifier   checkpatientonhosputl (string memory hospitanname,string memory patietname) {
+require(  bytes(patients[hospitanname][patietname].name ).length>1 , "sorry noyt foihdd plzz contact hospital authories");
+_;
+}
+function createpatientaccount(string  memory name,string memory  hospitalname,string  memory email,uint168 phnum ) public checkpatientonhosputl(hospitalname,name)  checkhospitalcurrentlyworking(hospitalname) {
+
+
+User   storage  current =users[name];
+current.name=name;
+current.email=email;
+current.phnum=phnum;
+
+current.hospitalname=hospitalname;
+
+
+
+
+
+}
+
+//checking crtainguserofhostital  patent hospitelil indo
+
+
+//useremialexiix
+modifier  checkuseremailexist(string memory name) {
+
+require(bytes(users[name].name).length>=1,"no user found using the given name ");
+
+    _;
+}
+
+
+function getuseremial( string  memory uname)  public  checkuseremailexist(uname) view returns(string memory ){
+
+
+
+ return   users[uname].email;
+
+
+}
+//useremialexiix
+
+
+//hospiyall
+function addpatient(  string memory name,string  memory blood,uint104 age, string memory hospitalname) public   checkhospitalcurrentlyworking(hospitalname)  {
+
+// host current=host(name,age);
+// Datereported memory reported=Datereported(getDate(),doctername,docterspecilist,imagedatastr,medicine);
+
+
+// Host storage  patientdetails;
+// patientdetails.name=name;
+// patientdetails.age=age;
+
+// patients[hospitalname].push(patientdetails);
+
+Host storage patientdetails=patients[hospitalname][name];
+
+patientdetails.name=name;
+patientdetails.age=age;  
+patientdetails.bloodgroup=   blood;
+
+allpatientshospital[hospitalname].push(  patientdetails);
+
+// Reports[hospitalname][name].push(reported);
+
+
+// users[name].reportsar[hospitalname].push(reported);
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+function getDate() public   view  returns (string memory)  {
+         (uint year, uint month, uint day)= DateTime.timestampToDate(block.timestamp);
+ string memory yearstr=Strings.toString(year);
+ string memory monthstr=Strings.toString(month);
+ string memory daystr=Strings.toString(day);
+string memory datestr=string.concat(yearstr,"/",monthstr,"/",daystr);
+return datestr;
+        
     }
 
-    // This is a type for a single proposal.
-    struct Proposal {
-        // If you can limit the length to a certain number of bytes, 
-        // always use one of bytes1 to bytes32 because they are much cheaper
-        bytes32 name;   // short name (up to 32 bytes)
-        uint voteCount; // number of accumulated votes
-    }
+function addreports(string memory medicine,string memory imagedatastr,string memory  hospitalname,string memory name,string memory doctername,string memory docterspecilist)  public checkpatientonhosputl(hospitalname,name)  checkhospitalcurrentlyworking(hospitalname)   {
+Datereported memory reported=Datereported(getDate(),doctername,docterspecilist,imagedatastr,medicine);
+Reports[hospitalname][name].push(reported);
+//  addto users
 
-    address public chairperson;
+users[name].reportsar[hospitalname].push(reported);
 
-    // This declares a state variable that
-    // stores a 'Voter' struct for each possible address.
-    mapping(address => Voter) public voters;
+}
 
-    // A dynamically-sized array of 'Proposal' structs.
-    Proposal[] public proposals;
+function getpatientdetails(string  memory hospitalname, string memory name)  public view checkpatientonhosputl(hospitalname,name)   returns (Host memory)   {
+   
+    return  patients[hospitalname][name];
 
-    /** 
-     * @dev Create a new ballot to choose one of 'proposalNames'.
-     * @param proposalNames names of proposals
-     */
-    constructor(bytes32[] memory proposalNames) {
-        chairperson = msg.sender;
-        voters[chairperson].weight = 1;
+    
+}
 
-        // For each of the provided proposal names,
-        // create a new proposal object and add it
-        // to the end of the array.
-        for (uint i = 0; i < proposalNames.length; i++) {
-            // 'Proposal({...})' creates a temporary
-            // Proposal object and 'proposals.push(...)'
-            // appends it to the end of 'proposals'.
-            proposals.push(Proposal({
-                name: proposalNames[i],
-                voteCount: 0
-            }));
-        }
-    }
 
-     /** 
-     * @dev Give 'voter' the right to vote on this ballot. May only be called by 'chairperson'.
-     * @param voter address of voter
-     */
-    function giveRightToVote(address voter) external {
-        // If the first argument of `require` evaluates
-        // to 'false', execution terminates and all
-        // changes to the state and to Ether balances
-        // are reverted.
-        // This used to consume all gas in old EVM versions, but
-        // not anymore.
-        // It is often a good idea to use 'require' to check if
-        // functions are called correctly.
-        // As a second argument, you can also provide an
-        // explanation about what went wrong.
-        require(
-            msg.sender == chairperson,
-            "Only chairperson can give right to vote."
-        );
-        require(
-            !voters[voter].voted,
-            "The voter already voted."
-        );
-        require(voters[voter].weight == 0, "Voter already has the right to vote.");
-        voters[voter].weight = 1;
-    }
 
-    /**
-     * @dev Delegate your vote to the voter 'to'.
-     * @param to address to which vote is delegated
-     */
-    function delegate(address to) external {
-        // assigns reference
-        Voter storage sender = voters[msg.sender];
-        require(sender.weight != 0, "You have no right to vote");
-        require(!sender.voted, "You already voted.");
+modifier  checkallpattientarrlength(string memory hospitalname) {
 
-        require(to != msg.sender, "Self-delegation is disallowed.");
+require(allpatientshospital[hospitalname].length >0,"the array  has no elements ");
+_;
 
-        // Forward the delegation as long as
-        // 'to' also delegated.
-        // In general, such loops are very dangerous,
-        // because if they run too long, they might
-        // need more gas than is available in a block.
-        // In this case, the delegation will not be executed,
-        // but in other situations, such loops might
-        // cause a contract to get "stuck" completely.
-        while (voters[to].delegate != address(0)) {
-            to = voters[to].delegate;
+}
 
-            // We found a loop in the delegation, not allowed.
-            require(to != msg.sender, "Found loop in delegation.");
-        }
 
-        Voter storage delegate_ = voters[to];
 
-        // Voters cannot delegate to accounts that cannot vote.
-        require(delegate_.weight >= 1);
+function getallpatientsinhospital( string memory hospitalname) public checkallpattientarrlength(hospitalname) view   returns (Host[] memory) {
 
-        // Since 'sender' is a reference, this
-        // modifies 'voters[msg.sender]'.
-        sender.voted = true;
-        sender.delegate = to;
+    return  allpatientshospital[hospitalname];
 
-        if (delegate_.voted) {
-            // If the delegate already voted,
-            // directly add to the number of votes
-            proposals[delegate_.vote].voteCount += sender.weight;
-        } else {
-            // If the delegate did not vote yet,
-            // add to her weight.
-            delegate_.weight += sender.weight;
-        }
-    }
 
-    /**
-     * @dev Give your vote (including votes delegated to you) to proposal 'proposals[proposal].name'.
-     * @param proposal index of proposal in the proposals array
-     */
-    function vote(uint proposal) external {
-        Voter storage sender = voters[msg.sender];
-        require(sender.weight != 0, "Has no right to vote");
-        require(!sender.voted, "Already voted.");
-        sender.voted = true;
-        sender.vote = proposal;
+}
 
-        // If 'proposal' is out of the range of the array,
-        // this will throw automatically and revert all
-        // changes.
-        proposals[proposal].voteCount += sender.weight;
-    }
 
-    /** 
-     * @dev Computes the winning proposal taking all previous votes into account.
-     * @return winningProposal_ index of winning proposal in the proposals array
-     */
-    function winningProposal() public view
-            returns (uint winningProposal_)
-    {
-        uint winningVoteCount = 0;
-        for (uint p = 0; p < proposals.length; p++) {
-            if (proposals[p].voteCount > winningVoteCount) {
-                winningVoteCount = proposals[p].voteCount;
-                winningProposal_ = p;
-            }
-        }
-    }
+function getreports(string  memory  hospitalname,string memory name) public view   returns(Datereported  [] memory){
+return  Reports[hospitalname][name];
+}
 
-    /** 
-     * @dev Calls winningProposal() function to get the index of the winner contained in the proposals array and then
-     * @return winnerName_ the name of the winner
-     */
-    function winnerName() external view
-            returns (bytes32 winnerName_)
-    {
-        winnerName_ = proposals[winningProposal()].name;
-    }
+
+
 }
